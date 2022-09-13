@@ -1,3 +1,24 @@
+<?php
+try {
+
+    $servername = 'localhost';
+    $username = 'bit_academy';
+    $password = 'bit_academy';
+    $dsn = "mysql:host=$servername;dbname=netland";
+
+    try {
+        $pdo = new PDO($dsn, $username, $password);
+
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $status = "Connected successfully";
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    
+} catch (PDOException $error) {
+    echo $error->getMessage();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +32,7 @@
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script>console.log("<?= $status ?>")</script>
     <style>
         .bg {
             background-image: url('src/img-fridge.jpeg');
@@ -56,7 +78,7 @@
                         <p class="leading-5 inline-block">
                             Het gepatenteerde ijssysteem van Bosch produceert tot wel 40 glazen gefilterd ijs per dag.<br>Zeg maar vaarwel tegen frequente ijsritten naar de winkel.
                             <a href="items.php" class="m-0">
-                                <i class="bi bi-arrow-up-right-square-fill"></i>
+                                <i class="bi bi-arrow-up-right-square"></i>
                             </a>
                         </p>
                     </div>
@@ -97,7 +119,7 @@
         <div class="flex flex-row items-center w-1/3 justify-around">
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">FAQ</a>
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Contact</a>
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Account Instellingen</a>
+            <a href="admin.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Admin Instellingen</a>
         </div>
     </footer>
     <script src="src/js/script.js"></script>
