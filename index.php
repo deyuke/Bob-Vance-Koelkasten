@@ -31,6 +31,7 @@
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Home</a>
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Over ons</a>
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Modellen</a>
+            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Gebruikt</a>
         </div>
     </header>
     <main class="w-full h-full flex flex-col items-center">
@@ -91,12 +92,12 @@
     </main>
     <footer class="w-full h-20 bg-black text-white flex flex-row justify-between items-center px-6 py-2">
         <div class="flex flex-row items-center">
-            <h1 class="text-4xl font-bold">Vance Koelkasten ©</h1>
+            <h1 class="text-4xl font-bold">Vance Koelkasten © 2022</h1>
         </div>
         <div class="flex flex-row items-center w-1/3 justify-around">
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Home</a>
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Over ons</a>
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Modellen</a>
+            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">FAQ</a>
+            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Contact</a>
+            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Account Instellingen</a>
         </div>
     </footer>
     <script src="src/js/script.js"></script>
