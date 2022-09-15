@@ -4,7 +4,7 @@ try {
     $servername = 'localhost';
     $username = 'bit_academy';
     $password = 'bit_academy';
-    $dsn = "mysql:host=$servername;dbname=vince";
+    $dsn = "mysql:host=$servername;dbname=netland";
 
     try {
         $pdo = new PDO($dsn, $username, $password);
@@ -14,16 +14,9 @@ try {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-
-    $items = $pdo->query("SELECT * FROM `items`");
-    
-    var_dump($items);
-    
 } catch (PDOException $error) {
     echo $error->getMessage();
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +31,9 @@ try {
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <script>console.log("<?= $status ?>")</script>
+    <script>
+        console.log("<?= $status ?>")
+    </script>
     <title>Vance Koelkasten</title>
 </head>
 
@@ -85,62 +80,46 @@ try {
 
             <section class="w-full pb-10">
                 <div class="text-xl p-3 flex-col flex items-center">
-                    <h3 class="text-3xl font-semibold outline outline-black outline-1 p-3 mt-2 mb-5"><i class="bi bi-arrow-down"></i>Ontdek onze koelkasten</h3>
-                    <section class='grid grid-cols-3 gap-6'>
-                        <div class='w-60 h-96 outline outline-black outline-1 flex flex-row mb-10'>
-                            <div class='w-full flex flex-col justify-between'>
-                                <img class='w-full h-1/3 bg-cover' src='src/img/img-fridge_gbssc5_c_scale,w_1400.jpg' alt='koelkast'>
-                                <div class='p-3 pr-0'>
-                                    <div class='flex justify-between items-center'>
-                                        <h4 class='text-2xl font-semibold'>GBS 5</h4>
-                                        <div class='bg-black p-2 text-white font-semibold'>Gebruikt</div>
+                    <h3 class="text-3xl font-semibold outline outline-black outline-1 p-3 mt-2 mb-5">Dé koelkasten dealer van Nederland!</h3>
+                    <section class="w-2/3">
+                        <div>
+                            <h4>Wij zijn simpelweg gewoon de beste. Waarom?</h4>
+                            <div class="flex justify-around">
+                                <div>
+                                    <div class="p-3">
+                                        <span class="font-bold text-2xl">
+                                            Ruim assortiment witgoed artikelen
+
+                                        </span>
+                                        <p>Vance Koelkasten is de nummer één in nieuwe, tweedehands en outlet witgoed artikelen. We bieden een ruim assortiment A-merk koelkasten en Amerikaanse koelkasten, koel-vries combinaties en vriezers.</p>
                                     </div>
-                                    <ul class='list-disc ml-5'>
-                                        <li>2-deurs</li>
-                                        <li>400 liter</li>
-                                        <li>Met vriezer</li>
-                                    </ul>
+
+                                    <div class="p-3">
+                                        <span class="font-bold text-2xl">Bekende merken: gegarandeerd de scherpste prijs</span>
+                                        <p>Ontdek ons ruime assortiment witgoed artikelen van bekende merken zoals Miele, Bosch, Samsung, AEG, Siemens en LG. Door de tweedehands en outlet producten kunnen we deze topmerken aanbieden voor elk budget: witgoed voor elke portemonnee! Natuurlijk werken de producten altijd naar behoren en krijg je gewoon garantie.</p>
+                                    </div>
+
+                                    <div class="p-3">
+                                        <span class="font-bold text-2xl">Persoonlijk advies</span>
+                                        <p>Of je nou een nieuwe of een gebruikte koelkast kiest, is het altijd fijn om persoonlijk geadviseerd te worden. Vance Koelkasten staat voor een decennium aan ervaring en kennis. Persoonlijk advies staat hoog in het vaandel. Op basis van jouw wensen en het budget, adviseren onze ervaren medewerkers over de meest geschikte koelkasten.</p>
+                                    </div>
                                 </div>
 
-                                <div class="w-full">
-                                    <a href="details.php?<?= $id ?>" class="p-3 bg-black text-white w-full flex justify-around">€ 1.499,-<i class="bi bi-cart4"></i></a>
+                                <div>
+
+                                    <div class="p-3">
+                                        <span class="font-bold text-2xl">Eenvoudig bestellen</span>
+                                        <p>Via onze webwinkel bestel je eenvoudig en snel. Wanneer je voor 23.00 uur besteld, wordt het product de volgende werkdag gratis bij jouw thuis bezorgd. Of kies zelf een bezorgdag. Uiteraard ben je ook welkom in ons magazijn. We geven je met een kop koffie graag de nodige informatie.</p>
+                                    </div>
+
+                                    <div class="p-3">
+                                        <span class="font-bold text-2xl">Gewoon goede service </span>
+                                        <p>Bij Vance Koelkasten mag je de beste service verwachten. We tillen de witgoed artikelen gratis naar boven, ook als er geen lift is. Alle producten worden zonder meerkosten door ons aangesloten en je oude apparaat nemen we gratis mee. Toch niet tevreden? Dan kun je het product gerust omruilen of retourneren waarna je je geld terug ontvangt.</p>
+                                    </div>
                                 </div>
                             </div>
+                            <p>Meer weten? Neem er dan zelf een kopje koffie bij en neem telefonisch contact met ons op. Onze ervaren medewerkers staan voor je klaar!</p>
                         </div>
-                        <?php
-                        while($item = $items->fetch()) {
-                            echo "
-                            <div class='w-60 h-96 outline outline-black outline-1 flex flex-row mb-10'>
-                            <div class='w-full flex flex-col justify-between'>
-                                <img class='w-full h-1/3 bg-cover' src='src/img/img-fridge_gbssc5_c_scale,w_1400.jpg' alt='koelkast'>
-                                <div class='p-3 pr-0'>
-                                    <div class='flex justify-between items-center'>
-                                        <h4 class='text-2xl font-semibold'>{$item['name']}</h4>
-                                        <div class='bg-black p-2 text-white font-semibold'>";
-                                        if ($item['used'] = 0){
-                                            echo "Nieuw";
-                                        } elseif ($item['used'] = 1) {
-                                            echo "Gebruikt";
-                                        }; echo
-                                        "</div>
-                                    </div>
-                                    <ul class='list-disc ml-5'>
-                                        <li>{$item['specs_1']}</li>
-                                        <li>{$item['specs_2']}</li>
-                                        <li>{$item['specs_3']}</li>
-                                    </ul>
-                                </div>
-
-                                <div class='w-full'>
-                                    <a href='details.php?id={$item['id']}' class='p-3 bg-black text-white w-full flex justify-around'>€ {$item['price']}<i class='bi bi-cart4'></i></a>
-                                </div>
-                            </div>
-                            </div>";
-
-                        
-                        }
-                        ?>
-
                     </section>
                 </div>
             </section>

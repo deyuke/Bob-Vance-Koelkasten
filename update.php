@@ -5,19 +5,55 @@ try {
     $username = 'bit_academy';
     $password = 'bit_academy';
     $dsn = "mysql:host=$servername;dbname=vince";
+    
+    try {
+        $pdo = new PDO($dsn, $username, $password);
 
-    $insert = "INSERT INTO `items`(name, image_path, used, date_purchased, specs_1, specs_2, specs_3, description, price)
-    VALUES(
-            '" . $_POST['name'] . "',
-            'src/uploads/" . $_POST['image_path'] . "',
-            " . intval($_POST['used']) . ",
-            '" . $_POST['date_purchased'] . "',
-            '" . $_POST['specs_1'] . "',
-            '" . $_POST['specs_2'] . "',
-            '" . $_POST['specs_3'] . "',
-            '" . $_POST['description'] . "',
-            '" . $_POST['price'] . "'
-        )";
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $status = "Connected successfully";
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    function editQueries($pdo)
+    {
+        $editName = "UPDATE `items` SET `name` = \"" . $_POST['name'] . "\" WHERE id = " . $_GET['id'];
+        $editPrice = "UPDATE `items` SET `price` = \"" . $_POST['price'] . "\" WHERE id = " . $_GET['id'];
+        $editDescription = "UPDATE `items` SET `description` = \"" . $_POST['description'] . "\" WHERE id = " . $_GET['id'];
+        $editUsed = "UPDATE `items` SET `used` = " . intval($_POST['used']) . " WHERE id = " . $_GET['id'];
+        $updateSpecs_1 = "UPDATE `items` SET `specs_1` = \"" . $_POST['specs_1'] . "\" WHERE id = " . $_GET['id'];
+        $updateSpecs_2 = "UPDATE `items` SET `specs_2` = \"" . $_POST['specs_2'] . "\" WHERE id = " . $_GET['id'];
+        $updateSpecs_3 = "UPDATE `items` SET `specs_3` = \"" . $_POST['specs_3'] . "\" WHERE id = " . $_GET['id'];
+        $updateDatePurchased = "UPDATE `items` SET `date_purchased` = \"" . $_POST['date_purchased'] . "\" WHERE id = " . $_GET['id'];
+
+        $pdo->query($editName);
+        $pdo->query($editPrice);
+        $pdo->query($editDescription);
+        $pdo->query($editUsed);
+        $pdo->query($updateSpecs_1);
+        $pdo->query($updateSpecs_2);
+        $pdo->query($updateSpecs_3);
+        $pdo->query($updateDatePurchased);
+    }
+
+
+
+    if (isset($_POST['submit'])) {
+        try {
+            editQueries($pdo);
+        } catch (PDOException $e2) {
+            echo $e2->getMessage();
+            var_dump($_POST);
+        }
+    }
+    try {
+        $itemdata = "SELECT * FROM items WHERE id = " . $_GET['id'];
+
+        $item = $pdo->query($itemdata);
+        $data = $item->fetch();
+    } catch (PDOException $th) {
+        echo $th->getMessage();
+    }
+
 
     // CREATE TABLE `items` (
     //     id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -30,24 +66,6 @@ try {
     //     description VARCHAR(255),
     //     price DECIMAL(10,2)
     // );
-    try {
-        $pdo = new PDO($dsn, $username, $password);
-
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $status = "Connected successfully";
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-
-    if (isset($_POST['submit'])) {
-        try {
-            $pdo->exec($insert);
-            // var_dump($insert); 
-        } catch (PDOException $e2) {
-            echo $e2->getMessage() . '<br><br>';
-            var_dump($_POST);
-        }
-    }
 
     $allow = array("jpg", "jpeg", "gif", "png");
 
@@ -115,36 +133,36 @@ try {
                 <form action="#" method="POST">
                     <div class="grid grid-cols-2 gap-3 m-3 mb-6">
                         <label for="name">Naam</label>
-                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="name" id="name" required>
+                        <input value="<?= $data['name']; ?>" class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="name" id="name" required>
 
                         <label for="price">Prijs</label>
-                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="number" name="price" id="price" step="0.01">
+                        <input value="<?= $data['price']; ?>" class="outline outline-black outline-1 px-2 py-1 font-normal" type="number" name="price" id="price" step="0.01">
 
                         <label for="description">Beschrijving</label>
-                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="description" id="description">
+                        <input value="<?= $data['description']; ?>" class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="description" id="description">
 
                         <label for="used">Gebruikt:</label>
                         <div>
-                            <input class="w-5" type="radio" name="used" id="used" value=0>Ja
-                            <input class="w-5" type="radio" name="used" id="used" value=1 checked>Nee
+                            <input class="w-5" type="radio" name="used" id="used" value=0 <?php if($data['used'] == 0) {echo "checked";}; ?>>Ja
+                            <input class="w-5" type="radio" name="used" id="used" value=1 <?php if($data['used'] == 1) {echo "checked";}; ?>>Nee
                         </div>
 
                         <label for="specs_list">Specificaties</label>
                         <div>
-                            <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="specs_1" id="specs_list" placeholder="Spec 1"></input>
-                            <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="specs_2" id="specs_list" placeholder="Spec 2"></input>
-                            <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="specs_3" id="specs_list" placeholder="Spec 3"></input>
+                            <input value="<?= $data['specs_1']; ?>" class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="specs_1" id="specs_list" placeholder="Spec 1"></input>
+                            <input value="<?= $data['specs_2']; ?>" class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="specs_2" id="specs_list" placeholder="Spec 2"></input>
+                            <input value="<?= $data['specs_3']; ?>" class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="specs_3" id="specs_list" placeholder="Spec 3"></input>
                         </div>
 
-                        <label for="date_purchased">Aankoopdatum</label>
-                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="date" name="date_purchased" id="date_purchased">
-
-                        <label for="image_path">Afbeelding</label>
-                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="file" accept="image/*" name="image_path" id="image_path">
+                        <label for="date_purchased">Aankoopdatum (BUG!!!!!!)</label>
+                        <input  value="<?= $data['date_purchased']; ?> class="outline outline-black outline-1 px-2 py-1 font-normal" type="date" name="date_purchased" id="date_purchased">
+                        
                     </div>
 
                     <input type="submit" value="Toevoegen" name="submit" id="submit" class="bg-black p-3 w-full text-white hover:cursor-pointer">
+
                 </form>
+
             </div>
         </div>
     </main>

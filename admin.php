@@ -14,16 +14,12 @@ try {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-
     $items = $pdo->query("SELECT * FROM `items`");
-    
-    var_dump($items);
-    
+
+
 } catch (PDOException $error) {
     echo $error->getMessage();
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,19 +34,23 @@ try {
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <script>console.log("<?= $status ?>")</script>
-    <title>Vance Koelkasten</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script>
+        console.log("<?= $status ?>")
+    </script>
+    <title>Vance Koelkasten Admin</title>
 </head>
 
 <body class="w-screen flex flex-col">
     <header class="w-full fixed flex z-10 bg-white flex-row justify-between items-center px-6 py-2 border-b-black border">
         <div class="flex flex-row items-center">
-            <a href="index.php" class="text-4xl font-bold">Vance Koelkasten</a>
+            <a href="admin.php" class="text-4xl font-bold">Vance Koelkasten <span class="text-2xl italic">Admin</span></a>
         </div>
         <div class="flex flex-row items-center w-1/3 justify-around">
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Home</a>
             <a href="about.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Over ons</a>
             <a href="#items" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Modellen</a>
+            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Gebruikt</a>
         </div>
     </header>
     <main class="w-full h-full flex flex-col items-center">
@@ -85,17 +85,17 @@ try {
 
             <section class="w-full pb-10">
                 <div class="text-xl p-3 flex-col flex items-center">
-                    <h3 class="text-3xl font-semibold outline outline-black outline-1 p-3 mt-2 mb-5"><i class="bi bi-arrow-down"></i>Ontdek onze koelkasten</h3>
-                    <section class='grid grid-cols-3 gap-6'>
-                        <div class='w-60 h-96 outline outline-black outline-1 flex flex-row mb-10'>
-                            <div class='w-full flex flex-col justify-between'>
-                                <img class='w-full h-1/3 bg-cover' src='src/img/img-fridge_gbssc5_c_scale,w_1400.jpg' alt='koelkast'>
-                                <div class='p-3 pr-0'>
-                                    <div class='flex justify-between items-center'>
-                                        <h4 class='text-2xl font-semibold'>GBS 5</h4>
-                                        <div class='bg-black p-2 text-white font-semibold'>Gebruikt</div>
+                    <h3 class="text-3xl font-semibold outline outline-black outline-1 p-3 mt-2 mb-5" id="items"><i class="bi bi-arrow-down"></i>Ontdek onze koelkasten</h3>
+                    <section class="grid grid-cols-3 gap-6">
+                        <div class="w-60 h-96 outline outline-black outline-1 flex flex-row mb-10">
+                            <div class="w-full flex flex-col justify-between">
+                                <img class="w-full h-1/3 bg-cover" src="src/img/img-fridge_gbssc5_c_scale,w_1400.jpg" alt="koelkast">
+                                <div class="p-3 pr-0">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-2xl font-semibold">GBS 5</h4>
+                                        <div class="bg-black p-2 text-white font-semibold">Gebruikt</div>
                                     </div>
-                                    <ul class='list-disc ml-5'>
+                                    <ul class="list-disc ml-5">
                                         <li>2-deurs</li>
                                         <li>400 liter</li>
                                         <li>Met vriezer</li>
@@ -103,7 +103,7 @@ try {
                                 </div>
 
                                 <div class="w-full">
-                                    <a href="details.php?<?= $id ?>" class="p-3 bg-black text-white w-full flex justify-around">€ 1.499,-<i class="bi bi-cart4"></i></a>
+                                    <a href="edit.php?<?= $id ?>" class="p-3 bg-black text-white w-full flex justify-around">€ 1.499,-<i class="bi bi-pencil-fill"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -117,9 +117,9 @@ try {
                                     <div class='flex justify-between items-center'>
                                         <h4 class='text-2xl font-semibold'>{$item['name']}</h4>
                                         <div class='bg-black p-2 text-white font-semibold'>";
-                                        if ($item['used'] = 0){
+                                        if ($item['used'] == 0){
                                             echo "Nieuw";
-                                        } elseif ($item['used'] = 1) {
+                                        } else {
                                             echo "Gebruikt";
                                         }; echo
                                         "</div>
@@ -132,7 +132,7 @@ try {
                                 </div>
 
                                 <div class='w-full'>
-                                    <a href='details.php?id={$item['id']}' class='p-3 bg-black text-white w-full flex justify-around'>€ {$item['price']}<i class='bi bi-cart4'></i></a>
+                                    <a href='update.php?id={$item['id']}' class='p-3 bg-black text-white w-full flex justify-around'>€ {$item['price']}<i class='bi bi-pencil-fill'></i></a>
                                 </div>
                             </div>
                             </div>";
@@ -140,6 +140,16 @@ try {
                         
                         }
                         ?>
+                        <div class="w-60 h-96 outline outline-black outline-1 flex flex-row mb-10" id="newbox">
+                            <div class="w-full flex flex-col justify-center">
+                                <a href="insert.php" class="flex justify-center flex-col items-center w-full">
+                                    <svg class="text-9xl" xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+                                        <path d="M23.45 36.7V24.55H11.3v-1.1h12.15V11.3h1.1v12.15H36.7v1.1H24.55V36.7Z" />
+                                    </svg>
+                                    <p class="p-4 text-center hidden" id="hiddenText">Voeg een nieuw product toe</p>
+                                </a>
+                            </div>
+                        </div>
 
                     </section>
                 </div>
@@ -151,9 +161,9 @@ try {
             <h1 class="text-4xl font-bold">Vance Koelkasten © 2022</h1>
         </div>
         <div class="flex flex-row items-center w-1/3 justify-around">
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">FAQ</a>
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Contact</a>
-            <a href="admin.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Admin Instellingen</a>
+            <a href="index.php" class="text-2xl px-3 py-3 border border-none">FAQ</a>
+            <a href="index.php" class="text-2xl px-3 py-3 border border-none">Contact</a>
+            <a href="admin.php" class="text-2xl px-3 py-3 border border-none">Admin Instellingen</a>
         </div>
     </footer>
     <script src="src/js/script.js"></script>
