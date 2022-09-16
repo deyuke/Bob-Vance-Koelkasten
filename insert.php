@@ -9,7 +9,7 @@ try {
     $insert = "INSERT INTO `items`(name, image_path, used, date_purchased, specs_1, specs_2, specs_3, description, price)
     VALUES(
             '" . $_POST['name'] . "',
-            'src/uploads/" . $_POST['image_path'] . "',
+            '" . $_POST['image_path'] . "',
             " . intval($_POST['used']) . ",
             '" . $_POST['date_purchased'] . "',
             '" . $_POST['specs_1'] . "',
@@ -48,29 +48,6 @@ try {
             var_dump($_POST);
         }
     }
-
-    $allow = array("jpg", "jpeg", "gif", "png");
-
-    $todir = 'src/uploads/';
-    try {
-
-        if (!!$_FILES['file']['tmp_name']) // is the file uploaded yet?
-        {
-            $info = explode('.', strtolower($_FILES['file']['name'])); // whats the extension of the file
-
-            if (in_array(end($info), $allow)) // is this file allowed
-            {
-                if (move_uploaded_file($_FILES['file']['tmp_name'], $todir . basename($_FILES['file']['name']))) {
-                    echo 'File uploaded';
-                }
-            } else {
-                // error this file ext is not allowed
-                echo 'File not allowed';
-            }
-        }
-    } catch (PDOException $e3) {
-        echo $e3->getMessage();
-    }
 } catch (PDOException $error) {
     echo $error->getMessage();
 } catch (PDOException $error) {
@@ -106,10 +83,10 @@ try {
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Home</a>
         </div>
     </header>
-    <main class="w-full h-full flex flex-col items-center mt-36" 3,75>
+    <main class="w-full h-full flex flex-col items-center mt-36">
         <div class="w-1/3 flex flex-col">
-            <div class="font-bold text-4xl text-white bg-black p-3 outline outline-black outline-1">
-                Voeg een nieuw product toe
+            <div class="font-bold text-3xl text-white bg-black p-3 outline outline-black outline-1">
+            <a href="admin.php" class="mr-3"><i class="bi bi-arrow-left"></i></a>Voeg een nieuw product toe
             </div>
             <div class="outline outline-black outline-1 h-full font-semibold">
                 <form action="#" method="POST">
@@ -121,7 +98,7 @@ try {
                         <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="number" name="price" id="price" step="0.01">
 
                         <label for="description">Beschrijving</label>
-                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="description" id="description">
+                        <textarea class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="description" id="description"></textarea>
 
                         <label for="used">Gebruikt:</label>
                         <div>
@@ -140,7 +117,7 @@ try {
                         <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="date" name="date_purchased" id="date_purchased">
 
                         <label for="image_path">Afbeelding</label>
-                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="file" accept="image/*" name="image_path" id="image_path">
+                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="image_path" id="image_path">
                     </div>
 
                     <input type="submit" value="Toevoegen" name="submit" id="submit" class="bg-black p-3 w-full text-white hover:cursor-pointer">

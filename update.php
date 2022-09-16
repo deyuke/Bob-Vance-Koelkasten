@@ -5,7 +5,7 @@ try {
     $username = 'bit_academy';
     $password = 'bit_academy';
     $dsn = "mysql:host=$servername;dbname=vince";
-    
+
     try {
         $pdo = new PDO($dsn, $username, $password);
 
@@ -35,7 +35,11 @@ try {
         $pdo->query($updateDatePurchased);
     }
 
-
+    function deleteProduct($pdo)
+    {
+        $deleteProduct = "DELETE FROM `items` WHERE id = " . $_GET['id'];
+        $pdo->query($deleteProduct);
+    }
 
     if (isset($_POST['submit'])) {
         try {
@@ -45,6 +49,15 @@ try {
             var_dump($_POST);
         }
     }
+    if (isset($_POST['delete'])) {
+        try {
+            deleteProduct($pdo);
+        } catch (PDOException $e9) {
+            echo $e9->getMessage();
+            var_dump($_POST);
+        }
+    }
+
     try {
         $itemdata = "SELECT * FROM items WHERE id = " . $_GET['id'];
 
@@ -52,42 +65,6 @@ try {
         $data = $item->fetch();
     } catch (PDOException $th) {
         echo $th->getMessage();
-    }
-
-
-    // CREATE TABLE `items` (
-    //     id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    //     name VARCHAR(100) NOT NULL,
-    //     image_path VARCHAR(255) NOT NULL,
-    //     image_name VARCHAR(100) NOT NULL,
-    //     used BIT,
-    //     date_purchased DATE,
-    //     specs_list VARCHAR(100),
-    //     description VARCHAR(255),
-    //     price DECIMAL(10,2)
-    // );
-
-    $allow = array("jpg", "jpeg", "gif", "png");
-
-    $todir = 'src/uploads/';
-    try {
-
-        if (!!$_FILES['file']['tmp_name']) // is the file uploaded yet?
-        {
-            $info = explode('.', strtolower($_FILES['file']['name'])); // whats the extension of the file
-
-            if (in_array(end($info), $allow)) // is this file allowed
-            {
-                if (move_uploaded_file($_FILES['file']['tmp_name'], $todir . basename($_FILES['file']['name']))) {
-                    echo 'File uploaded';
-                }
-            } else {
-                // error this file ext is not allowed
-                echo 'File not allowed';
-            }
-        }
-    } catch (PDOException $e3) {
-        echo $e3->getMessage();
     }
 } catch (PDOException $error) {
     echo $error->getMessage();
@@ -126,8 +103,8 @@ try {
     </header>
     <main class="w-full h-full flex flex-col items-center mt-36" 3,75>
         <div class="w-1/3 flex flex-col">
-            <div class="font-bold text-4xl text-white bg-black p-3 outline outline-black outline-1">
-                Voeg een nieuw product toe
+            <div class="flex font-bold text-4xl text-white bg-black p-3 outline outline-black outline-1">
+                <a href="admin.php" class="mr-3"><i class="bi bi-arrow-left"></i></a>Bewerk product
             </div>
             <div class="outline outline-black outline-1 h-full font-semibold">
                 <form action="#" method="POST">
@@ -143,8 +120,12 @@ try {
 
                         <label for="used">Gebruikt:</label>
                         <div>
-                            <input class="w-5" type="radio" name="used" id="used" value=0 <?php if($data['used'] == 0) {echo "checked";}; ?>>Ja
-                            <input class="w-5" type="radio" name="used" id="used" value=1 <?php if($data['used'] == 1) {echo "checked";}; ?>>Nee
+                            <input class="w-5" type="radio" name="used" id="used" value=0 <?php if ($data['used'] == 0) {
+                                                                                                echo "checked";
+                                                                                            }; ?>>Ja
+                            <input class="w-5" type="radio" name="used" id="used" value=1 <?php if ($data['used'] == 1) {
+                                                                                                echo "checked";
+                                                                                            }; ?>>Nee
                         </div>
 
                         <label for="specs_list">Specificaties</label>
@@ -153,13 +134,15 @@ try {
                             <input value="<?= $data['specs_2']; ?>" class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="specs_2" id="specs_list" placeholder="Spec 2"></input>
                             <input value="<?= $data['specs_3']; ?>" class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="specs_3" id="specs_list" placeholder="Spec 3"></input>
                         </div>
+                        <label for="image_path">Afbeelding-URL</label>
+                        <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="image_path" id="image_path" value="<?= $data['image_path'] ?>">
 
-                        <label for="date_purchased">Aankoopdatum (BUG!!!!!!)</label>
-                        <input  value="<?= $data['date_purchased']; ?> class="outline outline-black outline-1 px-2 py-1 font-normal" type="date" name="date_purchased" id="date_purchased">
-                        
                     </div>
+                    <div class="flex">
 
-                    <input type="submit" value="Toevoegen" name="submit" id="submit" class="bg-black p-3 w-full text-white hover:cursor-pointer">
+                        <input type="submit" value="VERWIJDER" name="delete" id="delete" class="bg-white p-3 w-1/3 outline outline-1 outline-black text-black hover:cursor-pointer">
+                        <input type="submit" value="Updaten" name="submit" id="submit" class="bg-black p-3 w-2/3 outline outline-1 outline-black text-white hover:cursor-pointer">
+                    </div>
 
                 </form>
 

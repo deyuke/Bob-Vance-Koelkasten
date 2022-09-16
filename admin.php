@@ -15,8 +15,6 @@ try {
         echo $e->getMessage();
     }
     $items = $pdo->query("SELECT * FROM `items`");
-
-
 } catch (PDOException $error) {
     echo $error->getMessage();
 }
@@ -50,7 +48,6 @@ try {
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Home</a>
             <a href="about.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Over ons</a>
             <a href="#items" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Modellen</a>
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Gebruikt</a>
         </div>
     </header>
     <main class="w-full h-full flex flex-col items-center">
@@ -108,21 +105,22 @@ try {
                             </div>
                         </div>
                         <?php
-                        while($item = $items->fetch()) {
+                        while ($item = $items->fetch()) {
                             echo "
                             <div class='w-60 h-96 outline outline-black outline-1 flex flex-row mb-10'>
                             <div class='w-full flex flex-col justify-between'>
-                                <img class='w-full h-1/3 bg-cover' src='src/img/img-fridge_gbssc5_c_scale,w_1400.jpg' alt='koelkast'>
+                                <img class='w-full h-1/3 bg-cover' src='";if (!str_contains($item['image_path'], ':')) {echo "src/img-fridge.jpeg";} else {echo $item['image_path'];};echo "' alt='koelkast'>
                                 <div class='p-3 pr-0'>
                                     <div class='flex justify-between items-center'>
                                         <h4 class='text-2xl font-semibold'>{$item['name']}</h4>
                                         <div class='bg-black p-2 text-white font-semibold'>";
-                                        if ($item['used'] == 0){
-                                            echo "Nieuw";
-                                        } else {
-                                            echo "Gebruikt";
-                                        }; echo
-                                        "</div>
+                            if ($item['used'] == 0) {
+                                echo "Nieuw";
+                            } else {
+                                echo "Gebruikt";
+                            };
+                            echo
+                            "</div>
                                     </div>
                                     <ul class='list-disc ml-5'>
                                         <li>{$item['specs_1']}</li>
@@ -136,8 +134,6 @@ try {
                                 </div>
                             </div>
                             </div>";
-
-                        
                         }
                         ?>
                         <div class="w-60 h-96 outline outline-black outline-1 flex flex-row mb-10" id="newbox">
@@ -162,7 +158,7 @@ try {
         </div>
         <div class="flex flex-row items-center w-1/3 justify-around">
             <a href="index.php" class="text-2xl px-3 py-3 border border-none">FAQ</a>
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none">Contact</a>
+            <a href="about.php#contact" class="text-2xl px-3 py-3 border border-none">Contact</a>
             <a href="admin.php" class="text-2xl px-3 py-3 border border-none">Admin Instellingen</a>
         </div>
     </footer>

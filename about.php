@@ -4,6 +4,7 @@ try {
     $servername = 'localhost';
     $username = 'bit_academy';
     $password = 'bit_academy';
+
     $dsn = "mysql:host=$servername;dbname=netland";
 
     try {
@@ -45,19 +46,19 @@ try {
         <div class="flex flex-row items-center w-1/3 justify-around">
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Home</a>
             <a href="about.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Over ons</a>
-            <a href="#items" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Modellen</a>
+            <a href="index.php#items" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white">Modellen</a>
         </div>
     </header>
-    <main class="w-full h-full flex flex-col items-center">
-        <div id="hero">
-            <picture class="h-full">
+    <main class="w-full h-full flex flex-col items-center justify-center">
+        <div id="hero justify-center w-full">
+            <picture class="h-full m-0 w-full">
                 <img sizes="(max-width: 1400px) 100vw, 1400px" srcset="
                 src/img/img-fridge_gbssc5_c_scale,w_200.jpg 200w,
                 src/img/img-fridge_gbssc5_c_scale,w_586.jpg 586w,
                 src/img/img-fridge_gbssc5_c_scale,w_828.jpg 828w,
                 src/img/img-fridge_gbssc5_c_scale,w_1126.jpg 1126w,
                 src/img/img-fridge_gbssc5_c_scale,w_1334.jpg 1334w,
-                src/img/img-fridge_gbssc5_c_scale,w_1400.jpg 1400w" src="src/img/img-fridge_gbssc5_c_scale,w_1400.jpg" alt="imehj">
+                src/img/img-fridge_gbssc5_c_scale,w_1400.jpg 1400w" src="src/img/img-fridge_gbssc5_c_scale,w_1400.jpg" alt="imehj" class="!m-0">
             </picture>
             <div class="absolute top-80 left-0 animate__animated animate__slideInLeft outline outline-black outline-1">
                 <div class="bg-black p-3">
@@ -77,53 +78,81 @@ try {
 
                 </div>
             </div>
+        </div>
 
-            <section class="w-full pb-10">
-                <div class="text-xl p-3 flex-col flex items-center">
-                    <h3 class="text-3xl font-semibold outline outline-black outline-1 p-3 mt-2 mb-5">Dé koelkasten dealer van Nederland!</h3>
-                    <section class="w-2/3">
-                        <div>
-                            <h4>Wij zijn simpelweg gewoon de beste. Waarom?</h4>
-                            <div class="flex justify-around">
-                                <div>
-                                    <div class="p-3">
-                                        <span class="font-bold text-2xl">
-                                            Ruim assortiment witgoed artikelen
+        <div class="w-full pb-10">
+            <section class="text-xl p-3 flex-col flex items-center">
+                <h3 class="text-3xl font-semibold outline outline-black outline-1 p-3 mt-2 mb-5">Dé koelkasten dealer van Nederland!</h3>
+                <article class="w-2/3">
+                    <div>
+                        <h4 class="text-3xl font-bold m-3">Wij zijn simpelweg gewoon de beste. Waarom?</h4>
+                        <div class="flex justify-around align-baseline">
+                            <div>
+                                <div class="p-3 align-baseline">
+                                    <span class="font-bold text-2xl">
+                                        Ruim assortiment witgoed artikelen
 
-                                        </span>
-                                        <p>Vance Koelkasten is de nummer één in nieuwe, tweedehands en outlet witgoed artikelen. We bieden een ruim assortiment A-merk koelkasten en Amerikaanse koelkasten, koel-vries combinaties en vriezers.</p>
-                                    </div>
-
-                                    <div class="p-3">
-                                        <span class="font-bold text-2xl">Bekende merken: gegarandeerd de scherpste prijs</span>
-                                        <p>Ontdek ons ruime assortiment witgoed artikelen van bekende merken zoals Miele, Bosch, Samsung, AEG, Siemens en LG. Door de tweedehands en outlet producten kunnen we deze topmerken aanbieden voor elk budget: witgoed voor elke portemonnee! Natuurlijk werken de producten altijd naar behoren en krijg je gewoon garantie.</p>
-                                    </div>
-
-                                    <div class="p-3">
-                                        <span class="font-bold text-2xl">Persoonlijk advies</span>
-                                        <p>Of je nou een nieuwe of een gebruikte koelkast kiest, is het altijd fijn om persoonlijk geadviseerd te worden. Vance Koelkasten staat voor een decennium aan ervaring en kennis. Persoonlijk advies staat hoog in het vaandel. Op basis van jouw wensen en het budget, adviseren onze ervaren medewerkers over de meest geschikte koelkasten.</p>
-                                    </div>
+                                    </span>
+                                    <p>Vance Koelkasten is de nummer één in nieuwe, tweedehands en outlet witgoed artikelen. We bieden een ruim assortiment A-merk koelkasten en Amerikaanse koelkasten, koel-vries combinaties en vriezers.</p>
                                 </div>
 
-                                <div>
+                                <div class="p-3 align-baseline">
+                                    <span class="font-bold text-2xl">Bekende merken: gegarandeerd de scherpste prijs</span>
+                                    <p>Ontdek ons ruime assortiment witgoed artikelen van bekende merken zoals Miele, Bosch, Samsung, AEG, Siemens en LG. Door de tweedehands en outlet producten kunnen we deze topmerken aanbieden voor elk budget: witgoed voor elke portemonnee! Natuurlijk werken de producten altijd naar behoren en krijg je gewoon garantie.</p>
+                                </div>
 
-                                    <div class="p-3">
-                                        <span class="font-bold text-2xl">Eenvoudig bestellen</span>
-                                        <p>Via onze webwinkel bestel je eenvoudig en snel. Wanneer je voor 23.00 uur besteld, wordt het product de volgende werkdag gratis bij jouw thuis bezorgd. Of kies zelf een bezorgdag. Uiteraard ben je ook welkom in ons magazijn. We geven je met een kop koffie graag de nodige informatie.</p>
-                                    </div>
-
-                                    <div class="p-3">
-                                        <span class="font-bold text-2xl">Gewoon goede service </span>
-                                        <p>Bij Vance Koelkasten mag je de beste service verwachten. We tillen de witgoed artikelen gratis naar boven, ook als er geen lift is. Alle producten worden zonder meerkosten door ons aangesloten en je oude apparaat nemen we gratis mee. Toch niet tevreden? Dan kun je het product gerust omruilen of retourneren waarna je je geld terug ontvangt.</p>
-                                    </div>
+                                <div class="p-3 align-baseline">
+                                    <span class="font-bold text-2xl">Persoonlijk advies</span>
+                                    <p>Of je nou een nieuwe of een gebruikte koelkast kiest, is het altijd fijn om persoonlijk geadviseerd te worden. Vance Koelkasten staat voor een decennium aan ervaring en kennis. Persoonlijk advies staat hoog in het vaandel. Op basis van jouw wensen en het budget, adviseren onze ervaren medewerkers over de meest geschikte koelkasten.</p>
                                 </div>
                             </div>
-                            <p>Meer weten? Neem er dan zelf een kopje koffie bij en neem telefonisch contact met ons op. Onze ervaren medewerkers staan voor je klaar!</p>
+
+                            <div>
+
+                                <div class="p-3 align-baseline">
+                                    <span class="font-bold text-2xl">Eenvoudig bestellen</span>
+                                    <p>Via onze webwinkel bestel je eenvoudig en snel. Wanneer je voor 23.00 uur besteld, wordt het product de volgende werkdag gratis bij jouw thuis bezorgd. Of kies zelf een bezorgdag. Uiteraard ben je ook welkom in ons magazijn. We geven je met een kop koffie graag de nodige informatie.</p>
+                                </div>
+
+                                <div class="p-3 align-baseline">
+                                    <span class="font-bold text-2xl">Gewoon goede service </span>
+                                    <p>Bij Vance Koelkasten mag je de beste service verwachten. We tillen de witgoed artikelen gratis naar boven, ook als er geen lift is. Alle producten worden zonder meerkosten door ons aangesloten en je oude apparaat nemen we gratis mee. Toch niet tevreden? Dan kun je het product gerust omruilen of retourneren waarna je je geld terug ontvangt.</p>
+                                </div>
+                            </div>
                         </div>
-                    </section>
-                </div>
+
+                        <p class="m-3 mt-6 text-3xl">Meer weten? Neem er dan zelf een kopje koffie bij en neem telefonisch contact met ons op. Onze ervaren medewerkers staan voor je klaar!</p>
+                    </div>
+                </article>
+                <h3 class="text-3xl font-semibold outline outline-black outline-1 p-3 mt-5 mb-5">Wie is Bob Vance?</h3>
+                <article class="w-2/3">
+                    <div class="flex flex-row justify-around">
+                        <p class="w-1/2">"Hallo ik ben Bob Vance en ik heb al meer dan 10 jaar ervaring met koelkasten en vriezers verkopen. Mijn bedrijf was eerst in Los Angeles, maar ik heb besloten om nu in Nederland te gaan werken. Ik kan nu Nederlands praten en daarom is mijn website in het Nederlands. Dat leek mij het beste voor de klanten."</p>
+                        <img class="h-40 " src="src/img_Bob_Vance.webp" alt="Bob Vance">
+                    </div>
+                </article>
+                <section class="w-full flex justify-center mt-20">
+                    <article class="w-1/3 flex flex-col outline outline-black outline-1">
+                        <div id="contact" class="font-bold text-4xl text-white bg-black p-3 outline outline-black outline-1">
+                            Neem contact met ons op!
+                        </div>
+                        <form>
+                            <div class="grid grid-cols-2 gap-3 m-3 mb-6">
+                                <label for="name">Naam</label>
+                                <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="name" id="name" required>
+
+                                <label for="email">E-mail</label>
+                                <input class="outline outline-black outline-1 px-2 py-1 font-normal" type="email" name="email" id="email" required>
+
+                                <label for="description">Beschrijving</label>
+                                <textarea class="outline outline-black outline-1 px-2 py-1 font-normal" type="text" name="description" id="description"></textarea>
+                            </div>
+                                <input type="submit" value="Verzenden" name="submit" id="submit" class="bg-black p-3 w-full text-white hover:cursor-pointer">
+                        </form>
+
+                    </article>
+                </section>
             </section>
-        </div>
     </main>
     <footer class="w-full h-20 bg-black text-white flex flex-row justify-between items-center px-6 py-2">
         <div class="flex flex-row items-center">
@@ -131,7 +160,7 @@ try {
         </div>
         <div class="flex flex-row items-center w-1/3 justify-around">
             <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">FAQ</a>
-            <a href="index.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Contact</a>
+            <a href="about.php#contact" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Contact</a>
             <a href="admin.php" class="text-2xl px-3 py-3 border border-none hover:bg-black hover:text-white ease-in-out">Admin Instellingen</a>
         </div>
     </footer>
