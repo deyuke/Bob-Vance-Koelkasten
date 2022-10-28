@@ -10,7 +10,7 @@ I recommend installing [XAMPP](https://www.apachefriends.org/download.html), thi
 
 Clone the repository in the htdocs directory in the XAMPP root directory, then run XAMPP to enable PhpMyAdmin and Apache.
 
-Navigate to http://localhost/phpmyadmin/ and make a neq user with all permissions. Then navigate to the SQL tab and copy all the code from the ```import.sql``` file and paste it in the query field. The database is now set up.
+Navigate to http://localhost/phpmyadmin/ and make a new user with all permissions. Then navigate to the SQL tab and copy all the code from the ```import.sql``` file and paste it in the query field. The database is now set up.
 
 After following the steps above, navigate to 
 http://localhost/ (name of the cloned repository) /index.php
